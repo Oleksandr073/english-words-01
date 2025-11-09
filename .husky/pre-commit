@@ -1,0 +1,15 @@
+echo 'Checking for project linting and formatting issues 🏗️👷'
+
+npm run check:lint ||
+(
+    echo 'Linting issues found ❌ Please run `npm run lint` to fix this automatically where it is possible.'
+    false; 
+)
+
+npm run check:format ||
+(
+    echo 'Formatting issues found ❌ Please run `npm run format` to fix this automatically.';
+    false;
+)
+
+echo 'No issues found ✅'
