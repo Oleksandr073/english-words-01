@@ -291,6 +291,7 @@ export const editWord = async ({
   definition,
   examples,
   notes,
+  status,
 }: EditWordRequestBody): Promise<void> => {
   if (
     word === undefined &&
@@ -298,10 +299,11 @@ export const editWord = async ({
     inputTags === undefined &&
     definition === undefined &&
     examples === undefined &&
-    notes === undefined
+    notes === undefined &&
+    status === undefined
   ) {
     throw new Error(
-      'At least one of the fields (word, translation, tags, definition, examples, notes) must be provided.',
+      'At least one of the fields (word, translation, tags, definition, examples, notes, status) must be provided.',
     );
   }
 
@@ -324,6 +326,7 @@ export const editWord = async ({
         ...(definition !== undefined && { definition: definition.trim() }),
         ...(examples !== undefined && { examples }),
         ...(notes !== undefined && { notes: notes.trim() }),
+        ...(status !== undefined && { status }),
         updatedAt: Timestamp.now(),
       });
     });
@@ -334,6 +337,7 @@ export const editWord = async ({
       ...(definition !== undefined && { definition: definition.trim() }),
       ...(examples !== undefined && { examples }),
       ...(notes !== undefined && { notes: notes.trim() }),
+      ...(status !== undefined && { status }),
       updatedAt: Timestamp.now(),
     });
   }
