@@ -1,5 +1,9 @@
-import { counterSlice } from './counter/slice';
+import { combineReducers } from '@reduxjs/toolkit';
 
-export const rootReducer = {
-  counter: counterSlice.reducer,
-};
+import { apiSlice } from './api/apiSlice';
+import { authSlice } from './auth/slice';
+
+export const rootReducer = combineReducers({
+  auth: authSlice.reducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
+});
