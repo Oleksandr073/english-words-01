@@ -84,12 +84,18 @@ const wordsApiSlice = apiSlice.injectEndpoints({
       },
     }),
     editWord: build.mutation<void, EditWordRequestBody>({
-      invalidatesTags: (_result, _error, { id, word, translation, tags }) => {
+      invalidatesTags: (
+        _result,
+        _error,
+        { id, word, translation, status, tags },
+      ) => {
         const invalidateTags = [{ type: ApiTagTypesEnum.Words, id: id }];
+        // Update the words list if any of the fields that are rendered in the list are changed
         if (
           word !== undefined ||
           translation !== undefined ||
-          tags !== undefined
+          tags !== undefined ||
+          status !== undefined
         ) {
           invalidateTags.push({
             type: ApiTagTypesEnum.Words,
